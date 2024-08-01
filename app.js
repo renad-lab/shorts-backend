@@ -19,6 +19,9 @@ app.get("/", (req, res) => {
 const shortsController = require("./controllers/shortsController");
 app.use("/shorts", shortsController);
 
+const authorsController = require("./controllers/authorsController");
+app.use("/authors", authorsController);
+
 // 404 PAGE
 app.get("*", (req, res) => {
   res.status(404).send("Page not found");
