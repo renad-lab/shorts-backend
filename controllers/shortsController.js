@@ -180,7 +180,7 @@ shorts.get("/", async (req, res) => {
 });
 
 // SHOW
-// URL: http://localhost:4001/shorts/:id
+// URL: http://localhost:4001/authors/:id/shorts
 // Method: GET
 // Description: Fetches a short by its ID. Replace :id with the specific short ID
 shorts.get("/:id", async (req, res) => {
@@ -199,7 +199,7 @@ shorts.get("/:id", async (req, res) => {
 });
 
 // CREATE
-// URL: http://localhost:4001/shorts
+// URL: http://localhost:4001/authors/:id/shorts
 // Method: POST
 // Description: Creates a new short with the data provided in the request body
 shorts.post("/", checkBoolean, checkName, validateURL, async (req, res) => {
@@ -213,7 +213,7 @@ shorts.post("/", checkBoolean, checkName, validateURL, async (req, res) => {
 });
 
 // DELETE
-// URL: http://localhost:4001/shorts/:id
+// URL: http://localhost:4001/authors/:id/shorts/:id
 // Method: DELETE
 // Description: Deletes a short by its ID. Replace :id with the specific short ID
 shorts.delete("/:id", async (req, res) => {
@@ -232,7 +232,7 @@ shorts.delete("/:id", async (req, res) => {
 });
 
 // UPDATE
-// URL: http://localhost:4001/shorts/:id
+// URL: http://localhost:4001/authors/:id/shorts/:id
 // Method: PUT
 // Description: Updates a short by its ID with the data provided in the request body. Replace :id with the specific short ID
 shorts.put("/:id", checkName, checkBoolean, validateURL, async (req, res) => {
