@@ -1,5 +1,8 @@
 const express = require("express");
-const router = express.Router();
+const authors = express.Router();
+
+const shortsController = require("./shortsController");
+authors.use("/:author_id/shorts", shortsController);
 
 const {
   getAllAuthors,
@@ -8,9 +11,10 @@ const {
   deleteAuthor,
   updateAuthor,
 } = require("../queries/authors");
+const { getAllShorts } = require("../queries/shorts");
 
 // Get all authors
-router.get("/", async (req, res) => {
+authors.get("/", async (req, res) => {
   try {
     const authorsList = await getAllAuthors();
     res.status(200).json(authorsList);
@@ -19,8 +23,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+authors.get("/allshorts", async (req, res) => {
+  try {
+    const allShorts = await getAllShorts();
+    res.status(200).json(allShorts);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
 // Get a specific author
-router.get("/:id", async (req, res) => {
+authors.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const author = await getAuthor(id);
@@ -35,7 +47,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Create a new author
-router.post("/", async (req, res) => {
+authors.post("/", async (req, res) => {
   try {
     const author = await createAuthor(req.body);
     res.status(201).json(author);
@@ -45,7 +57,7 @@ router.post("/", async (req, res) => {
 });
 
 // Delete an author
-router.delete("/:id", async (req, res) => {
+authors.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const deletedAuthor = await deleteAuthor(id);
@@ -60,7 +72,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 // Update an author
-router.put("/:id", async (req, res) => {
+authors.put("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const updatedAuthor = await updateAuthor(id, req.body);
@@ -74,4 +86,4 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = authors;

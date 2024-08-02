@@ -118,7 +118,9 @@
 // module.exports = shorts;
 
 const express = require("express");
-const shorts = express.Router();
+const shorts = express.Router({ mergeParams: true });
+
+const { getAuthor } = require("../queries/authors");
 
 const reviewsController = require("./reviewsController");
 // localhost:4001/shorts/:short_id/reviews
@@ -142,16 +144,34 @@ const {
 } = require("../validations/checkShorts.js");
 
 // INDEX
-// URL: http://localhost:4001/shorts
+// URL: http://localhost:4001/authors/:id/shorts
 // Method: GET
 // Description: Fetches all shorts
 shorts.get("/", async (req, res) => {
+  const { author_id } = req.params;
   try {
-    const allShorts = await getAllShorts();
-    if (allShorts.length > 0) {
-      res.status(200).json(allShorts);
+    // const allShorts = await getAllShorts();
+    // if (allShorts.length > 0) {
+    //   res.status(200).json(allShorts);
+    // } else {
+    //   res.status(404).json({ error: "No shorts found" });
+    // }
+
+    if (author_id) {
+      const author = await getAuthor(author_id);
+      const shortsByAuthor = await getShortsByAuthorID(author_id);
+      if (shortsByAuthor.length > 0) {
+        res.status(200).json(shortsByAuthor);
+      } else {
+        res.status(404).json({ error: "No shorts found for this author" });
+      }
     } else {
-      res.status(404).json({ error: "No shorts found" });
+      const allShorts = await getAllShorts();
+      if (allShorts.length > 0) {
+        res.status(200).json(allShorts);
+      } else {
+        res.status(404).json({ error: "No shorts found" });
+      }
     }
   } catch (error) {
     console.error("Error fetching all shorts:", error);

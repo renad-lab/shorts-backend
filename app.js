@@ -16,9 +16,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Shorts App");
 });
 
-const shortsController = require("./controllers/shortsController");
-app.use("/shorts", shortsController);
-
 const authorsController = require("./controllers/authorsController");
 app.use("/authors", authorsController);
 

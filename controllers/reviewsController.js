@@ -73,12 +73,4 @@ reviews.delete("/:id", async (req, res) => {
   }
 });
 
-// TEST JSON NEW
-// {
-//     "reviewer": "Lou",
-//     "title": "Fryin Better",
-//     "content": "With the great tips and tricks I found here",
-//     "short_id": "2",
-//     "rating": "4"
-// }
 module.exports = reviews;
