@@ -24,14 +24,14 @@ const getShort = async (id) => {
 const createShort = async (short) => {
   try {
     const newShort = await db.one(
-      "INSERT INTO shorts (name, url, category, description, is_favorite, author_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *",
+      "INSERT INTO shorts (name, url, category, description, is_favorite, writer_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *",
       [
         short.name,
         short.url,
         short.category,
         short.description,
         short.is_favorite,
-        short.author_id,
+        short.writer_id,
       ]
     );
     return newShort;
@@ -57,14 +57,14 @@ const deleteShort = async (id) => {
 const updateShort = async (id, short) => {
   try {
     const updatedShort = await db.one(
-      "UPDATE shorts SET name=$1, url=$2, category=$3, description=$4, is_favorite=$5, author_id=$6 WHERE id=$7 RETURNING *",
+      "UPDATE shorts SET name=$1, url=$2, category=$3, description=$4, is_favorite=$5, writer_id=$6 WHERE id=$7 RETURNING *",
       [
         short.name,
         short.url,
         short.category,
         short.description,
         short.is_favorite,
-        short.author_id,
+        short.writer_id,
         id,
       ]
     );
@@ -74,14 +74,14 @@ const updateShort = async (id, short) => {
   }
 };
 
-// Get shorts by author ID
-const getShortsByAuthorID = async (author_id) => {
+// Get shorts by writer ID
+const getShortsByWriterID = async (writer_id) => {
   try {
-    const shortsByAuthor = await db.any(
-      "SELECT * FROM shorts WHERE author_id = $1",
-      author_id
+    const shortsByWriter = await db.any(
+      "SELECT * FROM shorts WHERE writer_id = $1",
+      writer_id
     );
-    return shortsByAuthor;
+    return shortsByWriter;
   } catch (error) {
     return error;
   }
@@ -93,5 +93,5 @@ module.exports = {
   createShort,
   deleteShort,
   updateShort,
-  getShortsByAuthorID,
+  getShortsByWriterID,
 };

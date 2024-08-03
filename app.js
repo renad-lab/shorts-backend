@@ -16,8 +16,8 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Shorts App");
 });
 
-const authorsController = require("./controllers/authorsController");
-app.use("/authors", authorsController);
+const writersController = require("./controllers/writersController");
+app.use("/writers", writersController);
 
 // 404 PAGE
 app.get("*", (req, res) => {

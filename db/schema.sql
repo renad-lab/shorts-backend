@@ -4,14 +4,16 @@ CREATE DATABASE shorts_dev;
 
 \c shorts_dev;
 
--- Create the authors table
-CREATE TABLE authors (
+-- Create the writers table
+CREATE TABLE writers (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
-  biography TEXT
+  biography TEXT,
+  picture_url TEXT,
+  is_active BOOLEAN DEFAULT FALSE
 );
 
--- Create the shorts table with author_id column
+-- Create the shorts table with writer_id column
 CREATE TABLE shorts (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
@@ -19,7 +21,10 @@ CREATE TABLE shorts (
   category TEXT,
   description TEXT,
   is_favorite BOOLEAN,
-  author_id INTEGER REFERENCES authors (id) ON DELETE SET NULL
+  writer_id INTEGER REFERENCES writers (id) ON DELETE SET NULL,
+  picture_url TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create the reviews table
@@ -28,13 +33,14 @@ CREATE TABLE reviews (
   reviewer TEXT,
   title TEXT,
   content TEXT,
-  rating NUMERIC CHECK (rating >= 0 AND rating <= 5),
+  is_liked BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   short_id INTEGER REFERENCES shorts (id) ON DELETE CASCADE
 );
 
--- Create a junction table for many-to-many relationship between shorts and authors
-CREATE TABLE shorts_authors (
+CREATE TABLE shorts_writers (
   short_id INTEGER REFERENCES shorts (id) ON DELETE CASCADE,
-  author_id INTEGER REFERENCES authors (id) ON DELETE CASCADE,
-  PRIMARY KEY (short_id, author_id)
+  writer_id INTEGER REFERENCES writers (id) ON DELETE CASCADE,
+  PRIMARY KEY (short_id, writer_id) -- Composite primary key
 );
