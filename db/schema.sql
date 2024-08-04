@@ -39,6 +39,7 @@ CREATE TABLE reviews (
   short_id INTEGER REFERENCES shorts (id) ON DELETE CASCADE
 );
 
+-- Create the shorts_writers table
 CREATE TABLE shorts_writers (
   short_id INTEGER REFERENCES shorts (id) ON DELETE CASCADE,
   writer_id INTEGER REFERENCES writers (id) ON DELETE CASCADE,
