@@ -33,22 +33,22 @@ INSERT INTO shorts (name, url, category, description, is_favorite, writer_id, pi
 ('The Raven', 'https://www.poetryfoundation.org/poems/48860/the-raven-5964f5014d47a', 'poetry', 'This narrative poem features a man mourning the loss of his lover, Lenore. As he struggles with his grief, a talking raven visits him, symbolizing the man’s descent into madness and despair as he reflects on his sorrow and loss.', TRUE, 7, 'https://res.cloudinary.com/dxeoesm7e/image/upload/v1722709955/Designer_62_izpkuc.png', '2024-08-12 21:00:00', '2024-08-12 21:00:00'),
 ('The Fall of the House of Usher', 'https://americanenglish.state.gov/files/ae/resource_files/the_fall_of_the_house_of_usher.pdf', 'fiction', 'The story revolves around the narrator’s visit to the decaying mansion of his friend, Roderick Usher. As the narrator learns more about the Usher family''s eerie history, he witnesses a series of supernatural events leading to the final, horrific collapse of the house. The story explores themes of madness, decay, and the supernatural.', TRUE, 7, 'https://res.cloudinary.com/dxeoesm7e/image/upload/v1722709961/Designer_63_civ028.png', '2024-08-13 22:00:00', '2024-08-13 22:00:00');
 
-
 -- Insert data into reviews table
 INSERT INTO reviews (short_id, reviewer, title, content, is_liked, created_at, updated_at) VALUES
-(1, 'Marcus', 'Thought-Provoking', 'A deeply satirical take on societal issues', TRUE, '2024-08-01 10:00:00', '2024-08-01 10:00:00'),
-(2, 'Lucia', 'Chilling', 'A haunting story with a shocking twist', TRUE, '2024-08-02 11:00:00', '2024-08-02 11:00:00'),
-(3, 'Gaius', 'Inspirational', 'Encourages reflection on civil rights and responsibilities', TRUE, '2024-08-03 12:00:00', '2024-08-03 12:00:00'),
-(4, 'Flavia', 'Fascinating', 'A powerful exploration of mental health and gender roles', TRUE, '2024-08-04 13:00:00', '2024-08-04 13:00:00'),
-(5, 'Aurelia', 'Eye-Opening', 'A compelling narrative on imperialism', TRUE, '2024-08-05 14:00:00', '2024-08-05 14:00:00'),
-(6, 'Antonia', 'Empowering', 'A timeless call for individualism', TRUE, '2024-08-06 15:00:00', '2024-08-06 15:00:00'),
-(7, 'Cicero', 'Gripping', 'A masterful tale of guilt and paranoia', TRUE, '2024-08-07 16:00:00', '2024-08-07 16:00:00'),
-(8, 'Julia', 'Insightful', 'A poignant look at race and identity', TRUE, '2024-08-08 17:00:00', '2024-08-08 17:00:00'),
-(9, 'Octavia', 'Touching', 'A brief but impactful story', TRUE, '2024-08-09 18:00:00', '2024-08-09 18:00:00'),
-(10, 'Titus', 'Disturbing', 'A darkly humorous and thought-provoking story', TRUE, '2024-08-10 19:00:00', '2024-08-10 19:00:00'),
-(11, 'Cornelia', 'Kafkaesque', 'An unsettling and absurd transformation', TRUE, '2024-08-11 20:00:00', '2024-08-11 20:00:00'),
-(12, 'Maximus', 'Melancholic', 'A beautiful and sad coming-of-age story', TRUE, '2024-08-12 21:00:00', '2024-08-12 21:00:00'),
-(13, 'Livia', 'Revealing', 'A personal and societal reflection', TRUE, '2024-08-13 22:00:00', '2024-08-13 22:00:00');
+(1, 'Daemon Targaryen', 'Thought-Provoking', 'A deeply satirical take on societal issues', TRUE, '2024-08-01 10:00:00', '2024-08-01 10:00:00'),
+(2, 'Rhaenyra Targaryen', 'Chilling', 'A haunting story with a shocking twist', TRUE, '2024-08-02 11:00:00', '2024-08-02 11:00:00'),
+(3, 'Viserys Targaryen', 'Inspirational', 'Encourages reflection on civil rights and responsibilities', TRUE, '2024-08-03 12:00:00', '2024-08-03 12:00:00'),
+(4, 'Alicent Hightower', 'Fascinating', 'A powerful exploration of mental health and gender roles', TRUE, '2024-08-04 13:00:00', '2024-08-04 13:00:00'),
+(5, 'Laenor Velaryon', 'Eye-Opening', 'A compelling narrative on imperialism', TRUE, '2024-08-05 14:00:00', '2024-08-05 14:00:00'),
+(6, 'Rhaenys Targaryen', 'Empowering', 'A timeless call for individualism', TRUE, '2024-08-06 15:00:00', '2024-08-06 15:00:00'),
+(7, 'Otto Hightower', 'Gripping', 'A masterful tale of guilt and paranoia', TRUE, '2024-08-07 16:00:00', '2024-08-07 16:00:00'),
+(8, 'Corlys Velaryon', 'Insightful', 'A poignant look at race and identity', TRUE, '2024-08-08 17:00:00', '2024-08-08 17:00:00'),
+(9, 'Helaena Targaryen', 'Touching', 'A brief but impactful story', TRUE, '2024-08-09 18:00:00', '2024-08-09 18:00:00'),
+(10, 'Aegon Targaryen', 'Disturbing', 'A darkly humorous and thought-provoking story', TRUE, '2024-08-10 19:00:00', '2024-08-10 19:00:00'),
+(11, 'Baela Targaryen', 'Kafkaesque', 'An unsettling and absurd transformation', TRUE, '2024-08-11 20:00:00', '2024-08-11 20:00:00'),
+(12, 'Jacaerys Velaryon', 'Melancholic', 'A beautiful and sad coming-of-age story', TRUE, '2024-08-12 21:00:00', '2024-08-12 21:00:00'),
+(13, 'Vaemond Velaryon', 'Revealing', 'A personal and societal reflection', TRUE, '2024-08-13 22:00:00', '2024-08-13 22:00:00');
+
 
 -- Insert data into shorts_writers table
 INSERT INTO shorts_writers (short_id, writer_id) VALUES
