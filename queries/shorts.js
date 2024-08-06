@@ -24,7 +24,19 @@ const getShort = async (id) => {
 const createShort = async (short) => {
   try {
     const newShort = await db.one(
-      "INSERT INTO shorts (name, url, category, description, is_favorite, writer_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING *",
+      `
+      INSERT INTO shorts (
+        name, 
+        url, 
+        category, 
+        description, 
+        is_favorite, 
+        writer_id, 
+        picture_url
+      ) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *;
+      `,
       [
         short.name,
         short.url,
@@ -32,11 +44,13 @@ const createShort = async (short) => {
         short.description,
         short.is_favorite,
         short.writer_id,
+        short.picture_url,
       ]
     );
     return newShort;
   } catch (error) {
-    return error;
+    console.error("Error creating new short:", error);
+    throw new Error("Error creating short");
   }
 };
 
@@ -57,7 +71,20 @@ const deleteShort = async (id) => {
 const updateShort = async (id, short) => {
   try {
     const updatedShort = await db.one(
-      "UPDATE shorts SET name=$1, url=$2, category=$3, description=$4, is_favorite=$5, writer_id=$6 WHERE id=$7 RETURNING *",
+      `
+      UPDATE shorts 
+      SET 
+        name = $1, 
+        url = $2, 
+        category = $3, 
+        description = $4, 
+        is_favorite = $5, 
+        writer_id = $6, 
+        picture_url = $7, 
+        updated_at = CURRENT_TIMESTAMP
+      WHERE id = $8
+      RETURNING *;
+      `,
       [
         short.name,
         short.url,
@@ -65,12 +92,14 @@ const updateShort = async (id, short) => {
         short.description,
         short.is_favorite,
         short.writer_id,
+        short.picture_url,
         id,
       ]
     );
     return updatedShort;
   } catch (error) {
-    return error;
+    console.error(`Error updating short with ID ${id}:`, error);
+    throw new Error(`Error updating short with ID ${id}`);
   }
 };
 

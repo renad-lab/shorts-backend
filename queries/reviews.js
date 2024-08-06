@@ -27,13 +27,13 @@ const getReview = async (id) => {
 const newReview = async (review) => {
   try {
     const newReview = await db.one(
-      "INSERT INTO reviews (reviewer, title, content, rating, short_id) VALUES($1, $2, $3, $4, $5) RETURNING *",
+      "INSERT INTO reviews (reviewer, title, content, short_id, is_liked) VALUES($1, $2, $3, $4, $5) RETURNING *",
       [
         review.reviewer,
         review.title,
         review.content,
-        review.rating,
         review.short_id,
+        review.is_liked,
       ]
     );
     return newReview;
@@ -59,13 +59,13 @@ const deleteReview = async (id) => {
 const updateReview = async (review) => {
   try {
     const updatedReview = await db.one(
-      "UPDATE reviews SET reviewer=$1, title=$2, content=$3, rating=$4, short_id=$5 WHERE id=$6 RETURNING *",
+      "UPDATE reviews SET reviewer=$1, title=$2, content=$3, short_id=$4, is_liked=$5 WHERE id=$6 RETURNING *",
       [
         review.reviewer,
         review.title,
         review.content,
-        review.rating,
         review.short_id,
+        review.is_liked,
         review.id,
       ]
     );

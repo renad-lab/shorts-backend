@@ -25,10 +25,15 @@ const getWriter = async (id) => {
 // Create a new writer
 const createWriter = async (writer) => {
   try {
+    const { name, biography, picture_url = null, is_active = false } = writer;
+
     const newWriter = await db.one(
-      "INSERT INTO writers (name, biography) VALUES($1, $2) RETURNING *",
-      [writer.name, writer.biography]
+      `INSERT INTO writers (name, biography, picture_url, is_active) 
+       VALUES ($1, $2, $3, $4) 
+       RETURNING *`,
+      [name, biography, picture_url, is_active]
     );
+
     return newWriter;
   } catch (error) {
     console.error("Error creating new writer:", error);
@@ -50,13 +55,28 @@ const deleteWriter = async (id) => {
   }
 };
 
-// Update a writer by ID
 const updateWriter = async (id, writer) => {
   try {
-    const updatedWriter = await db.one(
-      "UPDATE writers SET name=$1, biography=$2 WHERE id=$3 RETURNING *",
-      [writer.name, writer.biography, id]
-    );
+    const { name, biography, picture_url = null, is_active = false } = writer;
+
+    const query = `
+      UPDATE writers
+      SET name = $1,
+          biography = $2,
+          picture_url = $3,
+          is_active = $4
+      WHERE id = $5
+      RETURNING *;
+    `;
+
+    const updatedWriter = await db.one(query, [
+      name,
+      biography,
+      picture_url,
+      is_active,
+      id,
+    ]);
+
     return updatedWriter;
   } catch (error) {
     console.error(`Error updating writer with ID ${id}:`, error);
