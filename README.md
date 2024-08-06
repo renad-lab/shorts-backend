@@ -31,7 +31,7 @@ This project is the backend for a "shorts" application, allowing users to manage
 To start the application, run:
 
 ```sh
-npm start
+nodemon
 ```
 
 ### Database Setup
