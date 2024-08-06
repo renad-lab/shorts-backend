@@ -4,7 +4,7 @@ CREATE DATABASE shorts_dev;
 
 \c shorts_dev;
 
--- Create the writers table
+
 CREATE TABLE writers (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE writers (
   is_active BOOLEAN DEFAULT FALSE
 );
 
--- Create the shorts table with writer_id column
+
 CREATE TABLE shorts (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE shorts (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create the reviews table
+
 CREATE TABLE reviews (
   id SERIAL PRIMARY KEY,
   reviewer TEXT,
@@ -39,9 +39,9 @@ CREATE TABLE reviews (
   short_id INTEGER REFERENCES shorts (id) ON DELETE CASCADE
 );
 
--- Create the shorts_writers table
+
 CREATE TABLE shorts_writers (
   short_id INTEGER REFERENCES shorts (id) ON DELETE CASCADE,
   writer_id INTEGER REFERENCES writers (id) ON DELETE CASCADE,
-  PRIMARY KEY (short_id, writer_id) -- Composite primary key
+  PRIMARY KEY (short_id, writer_id) 
 );
