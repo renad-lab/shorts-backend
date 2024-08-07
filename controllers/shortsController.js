@@ -4,7 +4,7 @@ const shorts = express.Router({ mergeParams: true });
 const { getWriter } = require("../queries/writers.js");
 
 const reviewsController = require("./reviewsController");
-// localhost:4001/shorts/:short_id/reviews
+
 shorts.use("/:short_id/reviews", reviewsController);
 
 // Queries
@@ -25,9 +25,6 @@ const {
 } = require("../validations/checkShorts.js");
 
 // INDEX
-// URL: http://localhost:4001/writers/:id/shorts
-// Method: GET
-// Description: Fetches all shorts
 shorts.get("/", async (req, res) => {
   const { writer_id } = req.params;
   try {
@@ -54,9 +51,6 @@ shorts.get("/", async (req, res) => {
 });
 
 // SHOW
-// URL: http://localhost:4001/writers/:id/shorts
-// Method: GET
-// Description: Fetches a short by its ID. Replace :id with the specific short ID
 shorts.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -73,9 +67,7 @@ shorts.get("/:id", async (req, res) => {
 });
 
 // CREATE
-// URL: http://localhost:4001/writers/:id/shorts
-// Method: POST
-// Description: Creates a new short with the data provided in the request body
+
 shorts.post("/", checkBoolean, checkName, validateURL, async (req, res) => {
   try {
     const short = await createShort(req.body);
@@ -87,9 +79,7 @@ shorts.post("/", checkBoolean, checkName, validateURL, async (req, res) => {
 });
 
 // DELETE
-// URL: http://localhost:4001/writers/:id/shorts/:id
-// Method: DELETE
-// Description: Deletes a short by its ID. Replace :id with the specific short ID
+
 shorts.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -106,9 +96,7 @@ shorts.delete("/:id", async (req, res) => {
 });
 
 // UPDATE
-// URL: http://localhost:4001/writers/:id/shorts/:id
-// Method: PUT
-// Description: Updates a short by its ID with the data provided in the request body. Replace :id with the specific short ID
+
 shorts.put("/:id", checkName, checkBoolean, validateURL, async (req, res) => {
   const { id } = req.params;
   try {
@@ -125,9 +113,7 @@ shorts.put("/:id", checkName, checkBoolean, validateURL, async (req, res) => {
 });
 
 // GET SHORTS BY WRITER ID
-// URL: http://localhost:4001/shorts/writer/:writer_id
-// Method: GET
-// Description: Fetches shorts for a specific writer. Replace :writer_id with the specific writer ID
+
 shorts.get("/writer/:writer_id", async (req, res) => {
   const { writer_id } = req.params;
   try {

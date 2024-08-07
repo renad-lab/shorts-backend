@@ -15,7 +15,7 @@ const {
 } = require("../queries/reviews");
 
 // INDEX
-// localhost:4001/shorts/1/reviews/
+
 reviews.get("/", async (req, res) => {
   const { short_id } = req.params;
   const reviews = await getAllReviews(short_id);
@@ -29,7 +29,7 @@ reviews.get("/", async (req, res) => {
 });
 
 // SHOW
-// localhost:4001/shorts/2/reviews/2
+
 reviews.get("/:id", async (req, res) => {
   const { short_id, id } = req.params;
   const review = await getReview(id);
@@ -43,7 +43,7 @@ reviews.get("/:id", async (req, res) => {
 });
 
 // UPDATE
-// localhost:4001/shorts/2/reviews/10
+
 reviews.put("/:id", async (req, res) => {
   const { id, short_id } = req.params;
   const updatedReview = await updateReview({ short_id, id, ...req.body });
@@ -55,7 +55,6 @@ reviews.put("/:id", async (req, res) => {
 });
 
 // CREATE
-// localhost:4001/shorts/1/reviews/
 reviews.post("/", async (req, res) => {
   const { short_id } = req.params;
   const review = await newReview({ ...req.body, short_id });

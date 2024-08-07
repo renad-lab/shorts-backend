@@ -60,5 +60,5 @@ INSERT INTO shorts_writers (short_id, writer_id) VALUES
 (10, 10),
 (11, 5),
 (12, 7),
-(13, 6)
+(13, 6);
 

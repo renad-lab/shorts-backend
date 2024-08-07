@@ -14,6 +14,7 @@ const {
 const { getAllShorts } = require("../queries/shorts");
 
 // Get all writers
+//localhost:4001/writers/
 writers.get("/", async (req, res) => {
   try {
     const writersList = await getAllWriters();
@@ -33,6 +34,37 @@ writers.get("/allshorts", async (req, res) => {
 });
 
 // Get a specific writer
+
+writers.get("/allshorts/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const writer = await getWriter(id);
+    if (writer) {
+      const writerShorts = await getAllShortsByWriterId(id);
+      res.status(200).json(writerShorts);
+    } else {
+      res.status(404).json({ error: "Writer not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+writers.get("/allshorts/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const writer = await getWriter(id);
+    if (writer) {
+      const writerShorts = await getAllShortsByWriterId(id);
+      res.status(200).json(writerShorts);
+    } else {
+      res.status(404).json({ error: "Writer not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 writers.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
